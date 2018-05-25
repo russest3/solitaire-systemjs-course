@@ -2,7 +2,7 @@ stage 'CI'
 node {
 
     git branch: 'jenkins2-course', 
-        url: 'https://github.com/g0t4/solitaire-systemjs-course'
+        url: 'https://github.com/russest3/solitaire-systemjs-course'
 
     // pull dependencies from npm
     // on windows use: bat 'npm install'
@@ -23,6 +23,13 @@ node {
     step([$class: 'JUnitResultArchiver', 
           testResults: 'test-results/**/test-results.xml'])
           
+}
+
+node {
+    sh 'ls'
+    sh 'rm -fr *'
+    unstash 'everything'
+    sh 'ls'
 }
 
 def notify(status){
