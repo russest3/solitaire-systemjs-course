@@ -48,6 +48,12 @@ def runTests(browser) {
     }
 }
 
+node {
+    notify('A deployment needs approved to staging')
+}
+
+input 'Deploy to staging?'
+
 def notify(status){
     emailext (
       to: "me@gmail.com",
