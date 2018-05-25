@@ -54,6 +54,14 @@ node {
 
 input 'Deploy to staging?'
 
+//Ensure concurrency is always set to one for deployment
+stage name: 'Deploy', concurrency: 1
+node {
+    sh "echo '<h1>${env.BUILD_DISPLAY_NAME}</h1>' >> app/index.html"
+    sh 'docker-compose up -d --build'
+    notify 'Solitaire Deployed!'
+}
+
 def notify(status){
     emailext (
       to: "me@gmail.com",
