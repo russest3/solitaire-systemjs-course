@@ -58,7 +58,7 @@ input 'Deploy to staging?'
 stage name: 'Deploy', concurrency: 1
 node {
     sh "echo '<h1>${env.BUILD_DISPLAY_NAME}</h1>' >> app/index.html"
-    sh -c "docker-compose up -d --build"
+    sh -c 'docker-compose up -d --build'
     notify 'Solitaire Deployed!'
 }
 
